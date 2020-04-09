@@ -16,10 +16,18 @@ package com.werdna.task02;
 
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        while (l1.next != null) {
 
-            ListNode listNode = new ListNode(l1.val + l2.val);
-            listNode.next = new ListNode()
-        }
+        if (l1.next == null && l2.next == null) return null;
+
+        int sum = l1.val + l2.val;
+
+        int result =  sum%10;
+        l2 = l2.next;
+        l1 = l1.next;
+
+        addTwoNumbers(l1, l2);
+
+        return ;
+
     }
 }
