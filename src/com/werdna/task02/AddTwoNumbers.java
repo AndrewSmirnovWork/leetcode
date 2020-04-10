@@ -17,17 +17,48 @@ package com.werdna.task02;
 public class AddTwoNumbers {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-        if (l1.next == null && l2.next == null) return null;
+        ListNode listNodeTail = l1;
+        ListNode listNodeNext = l2;
+        int carry = 0;
 
-        int sum = l1.val + l2.val;
+        while (l1.next == null && l2.next == null) {
 
-        int result =  sum%10;
-        l2 = l2.next;
-        l1 = l1.next;
+            int x = (l1 != null) ? l1.val : 0;
+            int y = (l2 != null) ? l2.val : 0;
 
-        addTwoNumbers(l1, l2);
+            int sum = x + y + carry;
 
+            carry = sum % 10;
+
+            ListNode listNode = new ListNode(sum);
+            listNode.next = new ListNode(carry);
+
+
+            l2 = l2.next;
+            l1 = l1.next;
+
+            addTwoNumbers(l1, l2);
+        }
         return ;
 
+    }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode l1 = l1, l2 = l2, curr = dummyHead;
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int x = (l1 != null) ? l1.val : 0;
+            int y = (l2 != null) ? l2.val : 0;
+            int sum = carry + x + y;
+            carry = sum / 10;
+            curr.next = new ListNode(sum % 10);
+            curr = curr.next;
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+        if (carry > 0) {
+            curr.next = new ListNode(carry);
+        }
+        return dummyHead.next;
     }
 }
